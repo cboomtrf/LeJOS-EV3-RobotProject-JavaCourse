@@ -3,6 +3,7 @@ package main;
 import lejos.hardware.Brick;
 import lejos.hardware.Button;
 import lejos.hardware.Key;
+import lejos.hardware.Sound;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
 import lejos.utility.Delay;
@@ -21,6 +22,7 @@ public class Marvin {
 	public static void main(String[] args) {
 		Marvin marvin = new Marvin();
 		marvin.run();
+		marvin.run2();
 		//new Marvin().run(); < hoef je geen naam voor te bedenken.
 	}
 	
@@ -31,8 +33,18 @@ public class Marvin {
 		waitForKey(Button.ENTER);
 	}
 	
-	private void waitForKey(Key enter) {
-		
+	private void run2() {
+		Sound.beep();
+//		Button.waitForAnyPress();
+	}
+	
+	public void waitForKey(Key key) {
+		while(key.isUp()) {
+			Delay.msDelay(100);
+		}
+		while(key.isDown()) {
+			Delay.msDelay(100);
+		}
 	}
 	
 }
