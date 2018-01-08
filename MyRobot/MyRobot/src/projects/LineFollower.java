@@ -8,6 +8,7 @@ import lejos.hardware.lcd.LCD;
 import lejos.hardware.motor.*;
 import lejos.hardware.port.*;
 import lejos.hardware.sensor.EV3TouchSensor;
+import lejos.hardware.sensor.SensorMode;
 import lejos.robotics.Color;
 import lejos.hardware.sensor.EV3ColorSensor;
 
@@ -22,8 +23,8 @@ public class LineFollower
 { 
     static UnregulatedMotor motorA = new UnregulatedMotor(MotorPort.B);
     static UnregulatedMotor motorB = new UnregulatedMotor(MotorPort.C);
-    static EV3TouchSensor   touch = new EV3TouchSensor(SensorPort.S1);
-    static EV3ColorSensor   color = new EV3ColorSensor(SensorPort.S3);
+    static EV3TouchSensor touchSensor = new EV3TouchSensor(SensorPort.S1);
+    static EV3ColorSensor colorSensor = new EV3ColorSensor(SensorPort.S3);
   
     Brick brick;
 	
@@ -56,8 +57,10 @@ public class LineFollower
 		motorB.setPower(40);
 
 		// drive waiting for touch sensor or escape key to stop driving.
+		SensorMode touchMode = touchSensor.getTouchMode();
+		float[] touchSample = new float[touchMode.sampleSize()];
 
-		while ((touch.getTouchMode() == 0) && Button.ESCAPE.isUp()) 
+		while (!(touchMode == 1) && Button.ESCAPE.isUp()) 
 		{
 			colorValue = color.getRedMode();
 
