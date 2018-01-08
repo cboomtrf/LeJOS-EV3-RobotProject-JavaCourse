@@ -1,4 +1,4 @@
-package projects;
+package main;
 
 import lejos.hardware.Brick;
 import lejos.hardware.ev3.LocalEV3;
