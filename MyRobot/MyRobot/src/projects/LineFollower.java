@@ -15,8 +15,8 @@ import lejos.robotics.Color;
 //Modify the example code to to do this.
 public class LineFollower 
 { 
-    static UnregulatedMotor motorA = new UnregulatedMotor(MotorPort.A);
-    static UnregulatedMotor motorB = new UnregulatedMotor(MotorPort.B);
+    static UnregulatedMotor motorA = new UnregulatedMotor(MotorPort.B);
+    static UnregulatedMotor motorB = new UnregulatedMotor(MotorPort.C);
     static TouchSensor        touch = new TouchSensor(SensorPort.S1);
     static ColorSensor        color = new ColorSensor(SensorPort.S3);
     
@@ -37,8 +37,8 @@ public class LineFollower
         
         Button.waitForAnyPress();
         
-        motorA.setPower(40);
         motorB.setPower(40);
+        motorC.setPower(40);
        
         // drive waiting for touch sensor or escape key to stop driving.
 

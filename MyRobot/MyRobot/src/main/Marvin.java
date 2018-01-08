@@ -35,7 +35,7 @@ public class Marvin {
 	
 	private void run2() {
 		Sound.beep();
-//		Button.waitForAnyPress();
+//		Button.waitForAnyPress(); doen we hier niet.
 	}
 	
 	public void waitForKey(Key key) {
