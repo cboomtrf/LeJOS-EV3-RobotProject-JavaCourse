@@ -7,7 +7,6 @@ import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
 import lejos.hardware.motor.*;
 import lejos.hardware.port.*;
-import lejos.robotics.RegulatedMotor;
 import lejos.utility.Delay;
 
 public class DriveSquare {
@@ -17,12 +16,12 @@ public class DriveSquare {
 	public DriveSquare() {
 		super();
 		brick = LocalEV3.get();
+		this.run();
 	}
 	
-    public static void main(String[] args) {
-    	DriveSquare driveSquare = new DriveSquare();
-    	driveSquare.run();
-    }
+//    public static void main(String[] args) {
+//    	new DriveSquare().run();
+//    }
     
     private void run() {
     	TextLCD display = brick.getTextLCD();
@@ -36,43 +35,43 @@ public class DriveSquare {
         Button.waitForAnyPress();
 
         // create two motor objects to control the motors.
-        RegulatedMotor motorLeft = new EV3LargeRegulatedMotor(MotorPort.A);
-        RegulatedMotor motorRight = new EV3LargeRegulatedMotor(MotorPort.B);
+        UnregulatedMotor motorA = new UnregulatedMotor(MotorPort.A);
+        UnregulatedMotor motorB = new UnregulatedMotor(MotorPort.B);
 
         for (int i = 0; i < 4; i++) {
-            // set motorspeed to 150 (values in degrees/sec).
-            motorLeft.setSpeed(150);
-            motorRight.setSpeed(150);
+            // set motors to 50% power.
+            motorA.setPower(50);
+            motorB.setPower(50);
 
             // wait 2 seconds.
             Delay.msDelay(2000);
 
             // stop motors with brakes on. 
-            motorLeft.stop();
-            motorRight.stop();
+            motorA.stop();
+            motorB.stop();
 
             // turn right by reversing the right motor.
-            motorLeft.backward();
-            motorRight.forward();
+            motorA.backward();
+            motorB.forward();
  
             // make the turn.
-            motorLeft.setSpeed(150);
-            motorRight.setSpeed(150);
+            motorA.setPower(50);
+            motorB.setPower(50);
 
             // adjust time to get a 90% turn.
             Delay.msDelay(1500);
 
-            motorLeft.stop();
-            motorRight.stop();
+            motorA.stop();
+            motorB.stop();
 
             // set right motor back to forward motion.
-            motorLeft.forward();
-            motorRight.forward();
+            motorA.forward();
+            motorB.forward();
         }
 
         // free up motor resources. 
-        motorLeft.close(); 
-        motorRight.close();
+        motorA.close(); 
+        motorB.close();
  
         Sound.beepSequence(); // we are done.
     }

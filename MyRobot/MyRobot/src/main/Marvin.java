@@ -1,5 +1,8 @@
 package main;
 
+import driveCircle.DriveCircle;
+import driveForward.DriveForward;
+import driveSquare.DriveSquare;
 import lejos.hardware.Brick;
 import lejos.hardware.Button;
 import lejos.hardware.Key;
@@ -7,6 +10,7 @@ import lejos.hardware.Sound;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
 import lejos.utility.Delay;
+import lineFollower.LineFollower;
 
 public class Marvin {
 
@@ -35,7 +39,11 @@ public class Marvin {
 	
 	private void run2() {
 		Sound.beep();
-//		Button.waitForAnyPress(); doen we hier niet.
+		new DriveCircle();
+		new DriveSquare();
+		new DriveForward();
+		new LineFollower();
+		Sound.beep();
 	}
 	
 	public void waitForKey(Key key) {

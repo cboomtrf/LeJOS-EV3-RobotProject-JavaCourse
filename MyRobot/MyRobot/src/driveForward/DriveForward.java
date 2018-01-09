@@ -8,7 +8,6 @@ import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
 import lejos.hardware.motor.*;
 import lejos.hardware.port.*;
-import lejos.robotics.RegulatedMotor;
 import lejos.utility.Delay;
 
 public class DriveForward {
@@ -18,18 +17,19 @@ public class DriveForward {
 	public DriveForward() {
 		super();
 		brick = LocalEV3.get();
+		this.run();
 	}
 	
-    public static void main(String[] args) {
-    	DriveForward driveForward = new DriveForward();
-    	driveForward.run();
-    }
+//    public static void main(String[] args) {
+//    	new DriveForward().run();
+//    }
     
     private void run() {
     	TextLCD display = brick.getTextLCD();
 		display.drawString("Drive Forward", 0, 3);
 		display.drawString("and Stop", 0, 4);
-		display.drawString("Press any key to start", 0, 6);
+		display.drawString("Press any key to", 0, 6);
+		display.drawString("start", 0, 7);
 
         Button.LEDPattern(4);     // flash green led and
         Sound.beepSequenceUp();   // make sound when ready.
@@ -37,23 +37,23 @@ public class DriveForward {
         waitForKey(Button.ENTER);
 
         // create two motor objects to control the motors.
-        RegulatedMotor motorLeft = new EV3LargeRegulatedMotor(MotorPort.A);
-        RegulatedMotor motorRight = new EV3LargeRegulatedMotor(MotorPort.B);
+        UnregulatedMotor motorA = new UnregulatedMotor(MotorPort.A);
+        UnregulatedMotor motorB = new UnregulatedMotor(MotorPort.B);
 
-        // set motorspeed to 150 (values in degrees/sec).
-        motorLeft.setSpeed(150);
-        motorRight.setSpeed(150);
+        // set motors to 50% power.
+        motorA.setPower(50);
+        motorB.setPower(50);
 
         // wait 2 seconds.
         Delay.msDelay(2000);
 
         // stop motors with brakes on. 
-        motorLeft.stop();
-        motorRight.stop();
+        motorA.stop();
+        motorB.stop();
 
         // free up motor resources. 
-        motorLeft.close(); 
-        motorRight.close();
+        motorA.close(); 
+        motorB.close();
  
         Sound.beepSequence(); // we are done.
     }
