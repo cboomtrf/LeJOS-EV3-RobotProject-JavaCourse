@@ -37,6 +37,7 @@ public class DriveSquare {
         // create two motor objects to control the motors.
         UnregulatedMotor motorA = new UnregulatedMotor(MotorPort.A);
         UnregulatedMotor motorB = new UnregulatedMotor(MotorPort.B);
+        UnregulatedMotor motorSmall = new UnregulatedMotor(MotorPort.D);
 
         for (int i = 0; i < 4; i++) {
             // set motors to 50% power.

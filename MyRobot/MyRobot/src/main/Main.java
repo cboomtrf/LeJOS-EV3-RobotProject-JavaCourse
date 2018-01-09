@@ -36,8 +36,8 @@ public class Main {
 	
 	private void run2() {
 		Sound.beep();
-		DriveForward forward = new DriveForward();
-		DriveSquare square = new DriveSquare();
+//		DriveForward forward = new DriveForward();
+//		DriveSquare square = new DriveSquare();
 		DriveCircle circle = new DriveCircle();
 //		LineFollower lineFollow = new LineFollower();
 		Sound.beep();

@@ -39,21 +39,25 @@ public class DriveForward {
         // create two motor objects to control the motors.
         UnregulatedMotor motorA = new UnregulatedMotor(MotorPort.A);
         UnregulatedMotor motorB = new UnregulatedMotor(MotorPort.B);
+        UnregulatedMotor motorSmall = new UnregulatedMotor(MotorPort.D);
 
         // set motors to 50% power.
         motorA.setPower(50);
         motorB.setPower(50);
+        motorSmall.setPower(100);
 
         // wait 2 seconds.
-        Delay.msDelay(2000);
+        Delay.msDelay(10000);
 
         // stop motors with brakes on. 
         motorA.stop();
         motorB.stop();
+        motorSmall.stop();
 
         // free up motor resources. 
         motorA.close(); 
         motorB.close();
+        motorSmall.close();
  
         Sound.beepSequence(); // we are done.
     }
