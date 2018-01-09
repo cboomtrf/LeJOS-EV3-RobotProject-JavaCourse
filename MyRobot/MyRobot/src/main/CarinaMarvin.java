@@ -12,11 +12,11 @@ import lejos.hardware.lcd.TextLCD;
 import lejos.utility.Delay;
 import lineFollower.LineFollower;
 
-public class Marvin {
+public class CarinaMarvin {
 
 	Brick brick;
 	
-	public Marvin() {
+	public CarinaMarvin() {
 		super();
 		brick = LocalEV3.get();
 	}
@@ -24,7 +24,7 @@ public class Marvin {
 	//File = > run as = > leJOS ev3 program. 
 	//Dan vertaalt eclipse programma naar robot die deze meteen als jar file uitvoert.
 	public static void main(String[] args) {
-		Marvin marvin = new Marvin();
+		CarinaMarvin marvin = new CarinaMarvin();
 		marvin.run();
 		marvin.run2();
 		//new Marvin().run(); < hoef je geen naam voor te bedenken.
