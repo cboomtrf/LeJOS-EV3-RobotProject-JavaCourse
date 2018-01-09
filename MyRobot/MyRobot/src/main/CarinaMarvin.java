@@ -39,10 +39,10 @@ public class CarinaMarvin {
 	
 	private void run2() {
 		Sound.beep();
-		new DriveCircle();
-		new DriveSquare();
-		new DriveForward();
-		new LineFollower();
+		DriveCircle circle = new DriveCircle();
+		DriveSquare square = new DriveSquare();
+		DriveForward forward = new DriveForward();
+		LineFollower lineFollow = new LineFollower();
 		Sound.beep();
 	}
 	
