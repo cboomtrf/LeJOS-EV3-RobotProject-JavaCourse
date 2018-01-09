@@ -1,17 +1,34 @@
 package driveSquare;
 
+import lejos.hardware.Brick;
 import lejos.hardware.Button;
 import lejos.hardware.Sound;
+import lejos.hardware.ev3.LocalEV3;
+import lejos.hardware.lcd.TextLCD;
 import lejos.hardware.motor.*;
 import lejos.hardware.port.*;
+import lejos.robotics.RegulatedMotor;
 import lejos.utility.Delay;
 
-public class DriveSquare
-{
-    public static void main(String[] args)
-    {
-        System.out.println("Drive in a Square\nand Stop\n");
-        System.out.println("Press any key to start");
+public class DriveSquare {
+	
+	Brick brick;
+	
+	public DriveSquare() {
+		super();
+		brick = LocalEV3.get();
+	}
+	
+    public static void main(String[] args) {
+    	DriveSquare driveSquare = new DriveSquare();
+    	driveSquare.run();
+    }
+    
+    private void run() {
+    	TextLCD display = brick.getTextLCD();
+		display.drawString("Drive in a Square", 0, 3);
+		display.drawString("and Stop", 0, 4);
+		display.drawString("Press any key to start", 0, 6);
 
         Button.LEDPattern(4);     // flash green led and
         Sound.beepSequenceUp();   // make sound when ready.
@@ -19,8 +36,8 @@ public class DriveSquare
         Button.waitForAnyPress();
 
         // create two motor objects to control the motors.
-        EV3LargeRegulatedMotor motorLeft = new EV3LargeRegulatedMotor(MotorPort.A);
-        EV3LargeRegulatedMotor motorRight = new EV3LargeRegulatedMotor(MotorPort.B);
+        RegulatedMotor motorLeft = new EV3LargeRegulatedMotor(MotorPort.A);
+        RegulatedMotor motorRight = new EV3LargeRegulatedMotor(MotorPort.B);
 
         for (int i = 0; i < 4; i++) {
             // set motorspeed to 150 (values in degrees/sec).
