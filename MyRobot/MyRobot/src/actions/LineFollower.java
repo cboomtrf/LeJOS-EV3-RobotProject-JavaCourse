@@ -1,4 +1,4 @@
-package lineFollower;
+package actions;
 
 import lejos.hardware.Brick;
 import lejos.hardware.Button;

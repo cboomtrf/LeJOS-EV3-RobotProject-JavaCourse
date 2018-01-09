@@ -1,8 +1,9 @@
 package main;
 
-import driveCircle.DriveCircle;
-import driveForward.DriveForward;
-import driveSquare.DriveSquare;
+import actions.DriveCircle;
+import actions.DriveForward;
+import actions.DriveSquare;
+import actions.LineFollower;
 import lejos.hardware.Brick;
 import lejos.hardware.Button;
 import lejos.hardware.Key;
@@ -10,24 +11,20 @@ import lejos.hardware.Sound;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
 import lejos.utility.Delay;
-import lineFollower.LineFollower;
 
-public class CarinaMarvin {
+public class Main {
 
 	Brick brick;
 	
-	public CarinaMarvin() {
+	public Main() {
 		super();
 		brick = LocalEV3.get();
 	}
 	
-	//File = > run as = > leJOS ev3 program. 
-	//Dan vertaalt eclipse programma naar robot die deze meteen als jar file uitvoert.
 	public static void main(String[] args) {
-		CarinaMarvin marvin = new CarinaMarvin();
+		Main marvin = new Main();
 		marvin.run();
 		marvin.run2();
-		//new Marvin().run(); < hoef je geen naam voor te bedenken.
 	}
 	
 	private void run() {
@@ -39,10 +36,10 @@ public class CarinaMarvin {
 	
 	private void run2() {
 		Sound.beep();
-		DriveCircle circle = new DriveCircle();
-		DriveSquare square = new DriveSquare();
 		DriveForward forward = new DriveForward();
-		LineFollower lineFollow = new LineFollower();
+		DriveSquare square = new DriveSquare();
+		DriveCircle circle = new DriveCircle();
+//		LineFollower lineFollow = new LineFollower();
 		Sound.beep();
 	}
 	
