@@ -1,8 +1,5 @@
 package actions;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import lejos.hardware.Brick;
 import lejos.hardware.Button;
 import lejos.hardware.Sound;
@@ -21,14 +18,10 @@ public class DriveCircle {
 	public DriveCircle() {
 		super();
 		brick = LocalEV3.get();
-		this.run();
+		this.runUntilTouched();
 	}
-	
-//  public static void main(String[] args) {
-//		new DriveCircle().run();
-//}
     
-    private void run() {
+    private void runUntilTouched() {
     	// create two motor objects to control the motors & touchsensor object.
     	UnregulatedMotor motorA = new UnregulatedMotor(MotorPort.A);
     	UnregulatedMotor motorB = new UnregulatedMotor(MotorPort.B);
@@ -45,39 +38,25 @@ public class DriveCircle {
     	Sound.beepSequenceUp();  // make sound when ready.
 
 		Button.waitForAnyPress();
-    	
-		LocalDateTime soon = LocalDateTime.now().plusSeconds(10);
 				
     	// set motors to different power levels. Adjust to get a circle.
     	motorA.setPower(70);
     	motorB.setPower(30);
     	
-    	while(true) {
+		long startTime = System.currentTimeMillis();
+		long duration;
+
+		do {
+			duration = System.currentTimeMillis() - startTime;
     		
     		if(isTouched(touchSP)) {
-    			System.out.println("break");
+    			display.clear();
+    			Sound.beepSequence();
+    			System.out.println("Touched!");
     			break;
     		}
-    		
-    		if( LocalDateTime.now().compareTo(soon) != -1) {
-    			break;
-    		}
-    	}
+    	} while (duration < 20000);
     	
-    	//only start to drive if the touchSensor is touched.
-//    	if (isTouched(touchSP)) {
-//    		  		
-//	    	// set motors to different power levels. Adjust to get a circle.
-//	    	motorA.setPower(70);
-//	    	motorB.setPower(30);
-//	    	
-//	    	//while touch isn't touched, wait to stop driving.
-//	    	//while (!isTouched(touchSP)) {};
-//    	};
-//    	
-//    	//wait 10 seconds.
-//    	Delay.msDelay(10000);
-//    	
     	// stop motors with brakes on.
     	motorA.stop();
     	motorB.stop();
